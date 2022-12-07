@@ -1,0 +1,69 @@
+﻿@page
+@model TP_ISIE_21.Pages.Booklist.IndexModel
+@{
+}
+
+
+<h1> ISIE Library </h1>
+
+<div class="container row">
+    <div class="col-6">
+        <h2 class="text-info">Our book's catalog </h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-page="create" class="btn btn-primary"> Create a new book </a>
+    </div>
+</div>
+
+
+<form method="post">
+
+@if(Model.Books.Count() > 0) {
+    <br> <br>
+    <table class="table table-striped border">
+        <tr class="table-secondary">
+           <th>
+              Nidhal
+           </th>
+           <th>
+              @Html.DisplayNameFor(m=>m.Books.FirstOrDefault().Name)
+           </th>
+           <th>
+              @Html.DisplayNameFor(m=>m.Books.FirstOrDefault().Author)
+           </th>
+
+
+
+        
+           
+
+
+         
+           <th></th>
+       </tr> 
+       @foreach(var item in Model.Books)
+        {
+            <tr>
+                 <td>
+                    @Html.DisplayFor(m=> item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(m=> item.Name)
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(m=>item.Author)
+                </td>
+               
+                <td>
+                    <button asp-page-handler="Delete" asp-route-id="@item.Id"
+   onclick="return confirm('Are you sure you want to delete ?')" class="btn btn-danger btn-sm">Delete
+</button>
+                    <a asp-route-id="@item.Id" asp-page="Edit" class="btn btn-success btn-sm"> Edit </a>
+                </td>
+            </tr>
+        }     
+        </table>
+}
+
+</form>
